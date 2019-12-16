@@ -12,9 +12,13 @@ struct MainView: View {
     
     @ObservedObject var profile = Profile()
     @EnvironmentObject var settings: Settings
+    @State private var textMV: String = ""
     
     var body: some View {
         VStack {
+            CustomTextField(text: $textMV)
+            Spacer()
+            
             Text("\(profile.score)")
             Button("Add one point!") {
                 self.profile.score += 1
@@ -23,8 +27,6 @@ struct MainView: View {
                 self.settings.colorChanger.toggle()
                 print(self.settings.colorChanger)
             }
-            .padding()
-            
             AnotherView(bindingScore: $profile.score)
         }
     }
